@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summage</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f3f9ff, #e6f0ff);
+      background-attachment: fixed;
+      color: #205781;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #205781, #4F959D);
+      color: white;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    }
+
+    .header-left {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .header-left span:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .header-center {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .header-right h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Main Layout */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+      padding: 5vh 8%;
+    }
+
+    .left-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .left-side h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      color: #205781;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .left-side img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 0; /* clean, no style */
+    }
+
+    .right-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .right-side button {
+      padding: clamp(1rem, 1.5vw, 1.5rem) clamp(2rem, 3vw, 3rem);
+      font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #4F959D, #77e2c0);
+      color: white;
+      cursor: pointer;
+      width: clamp(220px, 70%, 320px);
+      transition: all 0.3s ease;
+    }
+
+    .right-side button:hover {
+      background: linear-gradient(135deg, #345fa6, #2c4f8c);
+      transform: translateY(-2px);
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      header .header-left, header .header-right {
+        display: none;
+      }
+      header .header-center {
+        margin: 0 auto;
+        font-size: 1.1rem;
+      }
+      main {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.2rem;
+        padding: 6vh 5%;
+      }
+      .left-side, .right-side {
+        align-items: center;
+      }
+      .left-side h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+      }
+      .left-side img {
+        max-width: 450px;
+      }
+      .right-side button {
+        font-size: 16px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      header {
+        display: none;
+      }
+      main {
+        padding: 4vh 1.5rem;
+        gap: 1rem;
+      }
+      .left-side h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+      }
+      .left-side img {
+        max-width: 100%;
+      }
+      .right-side button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <span>About Us</span>
+      <span>FAQ</span>
+      <span>Contact</span>
+    </div>
+    <div class="header-center">Education without barriers</div>
+    <div class="header-right"><h1>Summage</h1></div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="left-side">
+      <h1>Summage</h1>
+      <img src="mainimage.png" alt="Education Image">
+    </div>
+    <div class="right-side">
+      <button>Begin Studying</button>
+      <button>About Summage</button>
+      <button>Summage Blogs</button>
+    </div>
+  </main>
+
+</body>
+</html>
