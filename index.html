@@ -100,8 +100,8 @@
     }
 
     .right-side button {
-      padding: clamp(1rem, 1.5vw, 1.5rem) clamp(2rem, 3vw, 3rem);
-      font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      padding: clamp(0.9rem, 2vw, 1.3rem) clamp(1.5rem, 3vw, 2.5rem);
       font-weight: 600;
       border: none;
       border-radius: 50px;
@@ -119,30 +119,38 @@
 
     /* Tablet */
     @media (max-width: 992px) {
-      header .header-left, header .header-right {
+      header .header-left,
+      header .header-right {
         display: none;
       }
+
       header .header-center {
         margin: 0 auto;
         font-size: 1.1rem;
       }
+
       main {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
         text-align: center;
-        gap: 1.2rem;
+        gap: 1.5rem;
         padding: 6vh 5%;
       }
-      .left-side, .right-side {
-        align-items: center;
-      }
+
       .left-side h1 {
         font-size: clamp(2rem, 6vw, 3rem);
       }
+
       .left-side img {
         max-width: 450px;
       }
+
       .right-side button {
-        font-size: 16px;
+        width: 75%;
+        max-width: 300px;
+        font-size: 1.2rem;
       }
     }
 
@@ -151,18 +159,29 @@
       header {
         display: none;
       }
+
       main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
         padding: 4vh 1.5rem;
         gap: 1rem;
       }
+
       .left-side h1 {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
       }
+
       .left-side img {
         max-width: 100%;
       }
+
       .right-side button {
-        font-size: 16px;
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 1rem;
+        border-radius: 12px;
       }
     }
   </style>
