@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Start learning at home — Landing (replica)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1: #9ee6ea;      /* soft teal (page) */
+    --bg-2: #bff0f3;
+    --card: #ffffff;
+    --muted: #9aa3ab;
+    --ink: #22262a;
+    --accent: #ffd24d;    /* yellow circular button */
+    --cta-green: #8be14d; /* sign up pill */
+    --shadow: 0 30px 50px rgba(3,22,26,0.12);
+    --card-radius: 22px;
+    --gap: 18px;
+    --maxw: 1180px;
+  }
+
+  /* Reset */
+  *{box-sizing:border-box}
+  html,body{height:100%; margin:0; font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background:linear-gradient(180deg,var(--bg-1),var(--bg-2)); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+  img{max-width:100%; display:block}
+
+  /* page container */
+  .wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:48px 20px;}
+
+  /* soft large shapes in the background to match image */
+  .bg-shapes{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(800px 400px at 10% 10%, rgba(255,255,255,0.06), transparent 20%),
+      radial-gradient(700px 350px at 85% 75%, rgba(255,255,255,0.06), transparent 20%);
+    opacity:.9;
+  }
+
+  /* hero card */
+  .hero-card{
+    width:100%;
+    max-width:var(--maxw);
+    background:var(--card);
+    border-radius:var(--card-radius);
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns: 1fr 540px;
+    gap:0;
+    padding:34px;
+    position:relative;
+    z-index:1;
+    overflow:visible;
+  }
+
+  /* responsive stacking */
+  @media (max-width: 980px){
+    .hero-card{grid-template-columns:1fr; padding:26px;}
+    .illustration-wrap{order:2; margin-top:10px;}
+  }
+
+  /* navigation row inside card (top bar) */
+  .topbar{
+    grid-column:1/-1;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    margin-bottom:8px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px; color:var(--muted);
+    font-weight:600; font-size:15px;
+  }
+  .hamburger{
+    width:22px; height:16px; display:inline-block; position:relative;
+  }
+  .hamburger::before, .hamburger::after, .hamburger div{
+    content:""; position:absolute; left:0; right:0; height:2px; background:var(--muted); border-radius:2px;
+  }
+  .hamburger::before{top:0}
+  .hamburger div{top:7px}
+  .hamburger::after{bottom:0}
+
+  nav.links{
+    display:flex; align-items:center; gap:22px; font-weight:600; color:var(--muted); font-size:13px;
+  }
+  nav.links a{opacity:.9}
+  .signup{
+    background:linear-gradient(180deg,#a6ef7f,#7ad033); border-radius:999px; padding:8px 14px; color:#06310b; font-weight:700; box-shadow: 0 6px 14px rgba(122,208,51,0.18);
+    font-size:13px;
+  }
+
+  /* Left content (text + search + dots) */
+  .left{
+    padding:20px 28px 18px 14px;
+    display:flex; flex-direction:column; justify-content:center;
+    gap:24px;
+  }
+  .eyebrow{color:var(--muted); font-weight:500; font-size:14px}
+  .title{
+    font-weight:700; color:var(--ink); line-height:1.02;
+    font-size: clamp(28px, 4.6vw, 48px);
+    margin:0;
+  }
+  .title .accent{display:block; color:var(--ink); font-weight:800; font-size: clamp(34px, 6.4vw, 56px);}
+  /* Search pill */
+  .search-pill{
+    margin-top:6px;
+    display:flex; align-items:center; gap:10px; width:100%; max-width:520px;
+    background:#fafafa; border-radius:999px; padding:14px 18px; box-shadow: 0 6px 18px rgba(16,24,32,0.06);
+  }
+  .search-pill input{border:0; outline:none; background:transparent; font-size:15px; color:var(--muted); width:100%;}
+  .search-pill button{
+    width:44px; height:44px; flex:0 0 44px; border-radius:999px; border:0; display:grid; place-items:center;
+    background:var(--accent); box-shadow:0 6px 12px rgba(255,210,77,0.22); cursor:pointer;
+  }
+  .search-pill button svg{width:18px; height:18px}
+
+  /* slider dots */
+  .dots{display:flex; gap:8px; align-items:center; margin-top:10px}
+  .dot{width:10px; height:10px; border-radius:50%; background:#f5f5f5; border:2px solid rgba(0,0,0,0.03)}
+  .dot.active{background:var(--accent); box-shadow: 0 6px 12px rgba(255,210,77,0.16)}
+
+  /* right illustration area */
+  .illustration-wrap{
+    display:flex; align-items:center; justify-content:center; padding:8px 18px;
+  }
+  .illustration{
+    width:100%; max-width:480px; height:auto; display:block;
+    transform:translateY(0);
+  }
+
+  /* bottom small credit like the image */
+  .credit{
+    position:absolute; left:50%; transform:translateX(-50%); bottom:-36px; color:rgba(255,255,255,0.9); font-weight:600; font-size:13px;
+    text-align:center; z-index:0;
+  }
+
+  /* tiny clouds / decorative around illustration */
+  .cloud{
+    position:absolute; z-index:0; opacity:.45;
+  }
+
+  /* small polish for rounded outer glow */
+  .hero-card::after{
+    content:""; position:absolute; inset:auto -20px -20px -20px; border-radius:26px; filter: blur(30px); z-index:0;
+    background: linear-gradient(90deg, rgba(11,106,244,0.04), rgba(244,50,11,0.04));
+    pointer-events:none; height:120px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-shapes"></div>
+
+  <div class="wrap">
+    <div class="hero-card" role="region" aria-label="Landing hero">
+      <!-- Top nav inside the card -->
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="hamburger" aria-hidden="true"><div></div></span>
+          <div class="brand">Your Brand</div>
+        </div>
+
+        <nav class="links" aria-label="Main navigation">
+          <a href="#" style="text-decoration:none; color:var(--muted);">Home</a>
+          <a href="#" style="text-decoration:none; color:var(--muted);">Courses</a>
+          <a href="#" style="text-decoration:none; color:var(--muted);">About</a>
+          <a href="#" style="text-decoration:none; color:var(--muted);">Contact</a>
+          <a class="signup" href="#" role="button">Sign up</a>
+        </nav>
+      </div>
+
+      <!-- Left column: text -->
+      <div class="left">
+        <div>
+          <div class="eyebrow">Online education</div>
+          <h2 class="title">Start learning <span class="accent">at home</span></h2>
+        </div>
+
+        <div>
+          <div class="search-pill" role="search" aria-label="Search courses">
+            <input type="search" placeholder="What are you looking for?" aria-label="Search field">
+            <button aria-label="Search">
+              <!-- arrow -->
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M13 5l6 7-6 7" stroke="#2a2a2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dots" aria-hidden="true" style="margin-top:12px">
+            <span class="dot active" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: inline SVG illustration (custom-made to match the Freepik style) -->
+      <div class="illustration-wrap" aria-hidden="true">
+        <!-- The SVG is compact but tries to match the image: laptop on stacked colorful books + mug + plant -->
+        <svg class="illustration" viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of laptop and books">
+          <defs>
+            <linearGradient id="bgGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#cfeffd"/>
+              <stop offset="1" stop-color="#e4f8ff"/>
+            </linearGradient>
+            <linearGradient id="bookY" x1="0" x2="1">
+              <stop offset="0" stop-color="#ffefb7"/>
+              <stop offset="1" stop-color="#ffd24d"/>
+            </linearGradient>
+            <linearGradient id="bookB" x1="0" x2="1">
+              <stop offset="0" stop-color="#cfe1ff"/>
+              <stop offset="1" stop-color="#9fbfff"/>
+            </linearGradient>
+            <linearGradient id="bookG" x1="0" x2="1">
+              <stop offset="0" stop-color="#bfffd5"/>
+              <stop offset="1" stop-color="#66e88a"/>
+            </linearGradient>
+          </defs>
+
+          <!-- soft background circle -->
+          <rect x="0" y="0" width="800" height="540" rx="18" fill="url(#bgGrad)" opacity="1"/>
+
+          <!-- shadow ellipse under books -->
+          <ellipse cx="430" cy="400" rx="220" ry="30" fill="#000" opacity="0.06"/>
+
+          <!-- big green book (standing) -->
+          <g transform="translate(270,220)">
+            <rect x="-40" y="10" width="60" height="220" rx="8" fill="#44c06b"/>
+            <rect x="-40" y="10" width="60" height="36" rx="8" fill="rgba(255,255,255,0.12)"/>
+            <rect x="-32" y="202" width="46" height="8" rx="4" fill="#2b8f47"/>
+          </g>
+
+          <!-- stack of books (bottom blue) -->
+          <g transform="translate(350,260)">
+            <rect x="-200" y="90" width="340" height="64" rx="10" fill="url(#bookB)" stroke="#d7e6ff" stroke-width="3"/>
+            <rect x="-200" y="146" width="340" height="14" rx="10" fill="#e9f0ff"/>
+            <!-- bookmark -->
+            <rect x="-30" y="110" width="14" height="36" fill="#66e8b8" rx="3"/>
+          </g>
+
+          <!-- middle yellow book -->
+          <g transform="translate(350,180)">
+            <rect x="-200" y="30" width="340" height="64" rx="10" fill="url(#bookY)" stroke="#ffeab2" stroke-width="3"/>
+            <rect x="-200" y="86" width="340" height="14" rx="10" fill="#fff6df"/>
+            <rect x="-70" y="46" width="16" height="30" fill="#ff9bcd" rx="3"/>
+          </g>
+
+          <!-- laptop on top -->
+          <g transform="translate(350,100)">
+            <rect x="-100" y="-8" width="200" height="110" rx="8" fill="#f6fbff" stroke="#e6eef9" stroke-width="4"/>
+            <rect x="-84" y="6" width="168" height="72" rx="6" fill="#ffffff"/>
+            <!-- screen inner -->
+            <rect x="-72" y="18" width="144" height="44" rx="4" fill="#f0f8ff"/>
+            <!-- lightbulb icon inside laptop -->
+            <g transform="translate(-4,42)">
+              <circle cx="4" cy="-10" r="20" fill="#ffd24d" stroke="#f6c842" stroke-width="2"/>
+              <rect x="-8" y="12" width="24" height="6" rx="3" fill="#d8c36d"/>
+              <rect x="-3" y="18" width="6" height="6" rx="2" fill="#b39a4f"/>
+            </g>
+            <!-- base -->
+            <rect x="-120" y="100" width="240" height="14" rx="8" fill="#f6fbff" stroke="#e6eef9" stroke-width="4"/>
+          </g>
+
+          <!-- pink mug -->
+          <g transform="translate(250,360)">
+            <rect x="-6" y="-20" width="44" height="44" rx="8" fill="#ff9bcd" stroke="#f5a6d1" stroke-width="2"/>
+            <path d="M30 -6 a14 14 0 0 0 0 28" stroke="#ff9bcd" stroke-width="6" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- plant pot -->
+          <g transform="translate(510,360)">
+            <rect x="-16" y="-6" width="84" height="48" rx="8" fill="#ffd28a" stroke="#f0bb5f" stroke-width="2"/>
+            <g transform="translate(26,-6)">
+              <path d="M0 0 C -18 -28 -6 -56 12 -48 C28 -40 38 -18 18 0 Z" fill="#66c587"/>
+              <path d="M30 2 C 18 -26 34 -56 60 -44 C78 -36 86 -18 60 2 Z" fill="#4cb36a"/>
+            </g>
+          </g>
+
+          <!-- decorative clouds -->
+          <g transform="translate(630,70)" opacity="0.9">
+            <ellipse cx="0" cy="0" rx="36" ry="14" fill="#fff" opacity="0.95"/>
+            <ellipse cx="44" cy="0" rx="22" ry="10" fill="#fff" opacity="0.95"/>
+          </g>
+
+        </svg>
+      </div>
+
+      <!-- copyright/credit (centered below card visually like the image) -->
+      <div class="credit">designed by <strong>freepik</strong></div>
+    </div>
+  </div>
+
+  <script>
+    // small JS: keep active dot rotating and search button demo ripple
+    (function(){
+      const dots = document.querySelectorAll('.dot');
+      let i = 0;
+      setInterval(()=> {
+        dots.forEach(d => d.classList.remove('active'));
+        dots[i % dots.length].classList.add('active');
+        i++;
+      }, 2800);
+
+      // simple click ripple on search button
+      document.querySelectorAll('.search-pill button').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          btn.animate([{ transform:'scale(1)' }, { transform:'scale(.94)'},{ transform:'scale(1)'}], {duration:260});
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
